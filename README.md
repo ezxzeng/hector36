@@ -1,4 +1,4 @@
-# Hecto36
+# Hector36
 ## A sub 100x100mm split keyboard with similar layout to the totem but without the extra pinky key
 
 left | right | outline
