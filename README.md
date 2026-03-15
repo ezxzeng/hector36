@@ -3,7 +3,7 @@
 
 left | right | outline
 -|-|-
-![left](images/board-front.png) | ![right](images/board-back.png) | ![outline](images/display_all_combo.svg)
+![left](images/board-front.png) | ![right](images/board-back.png) | ![outline](images/display_all_rotated.svg)
 
 A 5x3 split keyboard with 3 thumb keys. 
 
@@ -39,18 +39,6 @@ A 5x3 split keyboard with 3 thumb keys.
 
 ## Rendering and generation
 
-### Generate config:
-```bash
-python generate_config.py
-```
-Alternatively, edit the units of base_units.yaml with files from the `unit_diffs` folder.
-
-For example, to generate a case compatible with gateron low profile keyboards and a 1u thumb key instead of 1.5u:
-```bash
-python generate_config.py unit_diffs/bottom_usb.yaml unit_diffs/gateron_lp_case.yaml 
-```
-
-
 ### Ergogen:
 ```bash
 ergogen .
@@ -61,9 +49,9 @@ tbd
 
 ### Get board image renderings:
 ```bash
-docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/board.kicad_pcb images/board-front.png
+docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/mx/board.kicad_pcb images/board-front.png
 
-docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back routed_pcb/board.kicad_pcb images/board-back.png
+docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back routed_pcb/mx/board.kicad_pcb images/board-back.png
 ```
 
 ## Showcase
