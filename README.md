@@ -1,6 +1,9 @@
 # Hector36
 ## A sub 100x100mm split keyboard with similar layout to the totem but without the extra pinky key
 
+
+![images/20260401_200546.jpg](images/20260401_200546.jpg)
+
 left | right | outline
 -|-|-
 ![left](images/board-front.png) | ![right](images/board-back.png) | ![outline](images/display_all_rotated.svg)
@@ -45,7 +48,9 @@ ergogen .
 ```
 
 ### Case:
-tbd
+printables: https://www.printables.com/model/1659997-case-for-hector36
+
+onshape [link](https://cad.onshape.com/documents/dab7ead69061981322a5fa82/w/eeec2b07408bf6c3576b55db/e/49101eb28d1b1828dfaa91ca?renderMode=0&uiState=69ce0391edbfc1314134fd9e)
 
 ### Get board image renderings:
 ```bash
@@ -56,3 +61,8 @@ docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --
 
 ## Showcase
 
+![images/20260401_200546.jpg](images/20260401_200546.jpg)
+
+![images/20260401_200359.jpg](images/20260401_200359.jpg)
+
+![images/20260401_200325.jpg](images/20260401_200325.jpg)
