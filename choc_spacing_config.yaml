@@ -1,0 +1,555 @@
+units:
+  mx:                 0
+  choc:               1
+  gateron_lp:         0
+
+  mx_spacing:         0
+  millmax_diameter:   1.6
+  mx_hotswap:         1
+  mx_reverse:         1
+  mx_pth:             0
+  mx_rev_pad:         1
+  mx_neg_y:           1
+  gateron_lp_hotswap: 1
+  gateron_lp_reverse: 1
+  gateron_lp_pth:     0
+  gateron_lp_rev_pad: 1
+  gateron_lp_neg_y:   1
+  choc_hotswap:       1
+  choc_millmax:       0
+  choc_reverse:       1
+  choc_pth:           0
+  choc_neg_y:         1
+  keycaps:            1
+  center_x: 130
+  center_y: -103
+  kx: 18
+  ky: 18
+  px: kx + 1.2
+  py: ky + 1.2
+  thumb_size: 1
+  pinky_splay: -5.5
+  ring_splay: -4.5
+  main_rot: -4
+  tot_rot: pinky_splay+ring_splay+main_rot
+
+  mcu_x: -23
+  mcu_y: -23.5
+  mcu_rot: 90+tot_rot
+  reset_x: -38
+  reset_y: -25
+  reset_rot: tot_rot+90
+  power_x: -44
+  power_y: -35
+  power_rot: tot_rot+180
+  jst_x: -5.8
+  jst_y: -1
+  jst_rot: tot_rot
+  bottom_left_pcb_cut: 15
+  mid_left_pcb_y: 35
+  batt_x: 5
+  batt_y: -41
+  batt_rot: tot_rot
+
+  case_left_offset: 3.5
+  case_top_offset: 11
+  case_right_offset: 8
+  case_left_to_mid_finger_top: 49
+  case_tol: 0.2
+  bottom_left_case_cut: bottom_left_pcb_cut + abs(case_left_offset*tan((tot_rot)*pi/180))-case_tol
+  left_case_x_travel: abs((100-bottom_left_case_cut)*tan((main_rot)*pi/180))
+  top_left_case_offset: case_left_offset - left_case_x_travel
+  mid_finger_top_to_case_right_x: case_right_offset+ top_left_case_offset +100-case_left_to_mid_finger_top
+  mid_finger_top_to_case_right_y: -1*abs(mid_finger_top_to_case_right_x * tan((tot_rot)*pi/180))
+  case_bottom_offset: 5
+  case_thumb_x: -14
+  case_thumb_y: -14.5
+
+  mounting_0_x: center_x-43.5
+  mounting_0_y: center_y+46.5
+  mounting_1_x: center_x+39
+  mounting_1_y: center_y+46.5
+  mounting_2_x: center_x+46.5
+  mounting_2_y: center_y-20
+  mounting_3_x: center_x+29.5
+  mounting_3_y: center_y-46.5
+  mounting_4_x: center_x-46.5
+  mounting_4_y: center_y-23
+
+points:
+  zones:
+    matrix:
+      # Fix placement on KiCAD sheet.
+      anchor.shift: [100, -100]
+      key:
+        padding: 1ky
+        spread: 1kx
+      rotate: main_rot
+      columns:
+        pinky:
+          rows:
+            bottom:
+              shift: [-3.79, 0]
+        ring:
+          key:
+            splay: pinky_splay
+            stagger: 12.3
+          rows:
+            bottom.shift: [-1.89, 0]
+            top.rotate: 180
+        middle:
+          key:
+            splay: ring_splay
+            stagger: 9.47
+          rows.top.rotate: 180
+        index.key:
+          splay: 0
+          stagger: -9.47
+        inner:
+          key:
+            stagger: -1.89
+          rows.top.rotate: 180
+      rows:
+        bottom.padding: kx
+        home.padding: kx
+        top.padding: kx
+    thumb:
+      anchor:
+        ref: matrix_middle_bottom
+        shift: [12.3, -31]
+      columns:
+        inner:
+          key.name: thumb_inner
+        tucky:
+          key:
+            name: thumb_tucky
+            stagger: -2
+            splay: -14
+            shift: [3, 0]
+        reachy:
+          key.spread: kx
+          key.splay: -16
+          key.shift: [7, -1]
+          key.rotate: 90
+          key.width: thumb_size * kx
+          key.name: thumb_reachy
+outlines:
+  # ==================== keys ====================
+  key_outline:
+    - what: rectangle
+      where: true
+      size: [kx, ky]
+      operation: stack
+  _small_keys:
+    - what: rectangle
+      where: true
+      size: [kx-1, ky-1]
+  _expanded_key_outline:
+    - what: rectangle
+      where: true
+      size: [px+1.2, py+1.2]
+  _limits:
+    - what: rectangle
+      size: [100, 100]
+      adjust.shift: [center_x, center_y]
+  _batt_cuttout:
+    - what: polygon
+      points:
+        - shift: [center_x-17, center_y-50]
+        - shift: [24*abs(tan(tot_rot*pi/180)),24]
+        - shift: [23.4, -5.6]
+        - shift: [15, -8]
+        - shift: [-20*abs(tan(tot_rot*pi/180)), -20]
+  _pcb_outline:
+    - what: polygon
+      points:
+        - shift: [center_x-50, center_y-50+bottom_left_pcb_cut]
+        #- shift: [0, 100-bottom_left_pcb_cut]
+        - shift: [0, mid_left_pcb_y]
+        - shift: [(100-mid_left_pcb_y-bottom_left_pcb_cut)*abs(tan(main_rot*pi/180)), 100-mid_left_pcb_y-bottom_left_pcb_cut]
+        - shift: [100-(100-mid_left_pcb_y-bottom_left_pcb_cut)*abs(tan(main_rot*pi/180))-10, 0]
+        - shift: [10, -3]
+        - shift: [0, -92.25]
+        - shift: [-4.75, -4.75]
+        #- shift: [-7, 0]
+        #- shift: [-9, 9]
+        #- shift: [-18, 9.5]
+        #- shift: [-20, 4.8]
+        - shift: [-96.75 + abs(bottom_left_pcb_cut/tan((tot_rot)*pi/180)), 0]
+      fillet: 2
+    - -_batt_cuttout
+  pcb_outline:
+    - name: _pcb_outline
+      fillet: 2
+  case_outline:
+    - what: polygon
+      points:
+        - shift: [center_x-50-case_left_offset, center_y-50+bottom_left_case_cut]
+        - shift: [left_case_x_travel, 100-bottom_left_case_cut+case_tol]
+        - shift: [case_left_to_mid_finger_top, case_top_offset]
+        - shift: [mid_finger_top_to_case_right_x,mid_finger_top_to_case_right_y]
+        - shift: [0, -100-mid_finger_top_to_case_right_y-case_top_offset-case_thumb_y-case_bottom_offset-case_tol]
+        - shift: [case_thumb_x, case_thumb_y]
+        - shift: [(-100-case_thumb_x-case_left_offset-case_right_offset) +abs((bottom_left_case_cut+case_bottom_offset)/tan((tot_rot)*pi/180)), 0]
+      fillet: 3
+  _controller_outline:
+    - what: polygon
+      points:
+        - shift: [-17.78, 8.89]
+        - shift: [33.02, 0]
+        - shift: [0, -17.78]
+        - shift: [-33.02, 0]
+        - shift: [0, 5.08]
+        - shift: [-1.524, 0]
+        - shift: [0, 7.62]
+        - shift: [1.524, 0]
+      adjust: 
+        shift: [center_x+mcu_x, center_y+mcu_y]
+        rotate: mcu_rot
+  _reset_outline:
+    - what: rectangle
+      size: [8, 3.5]
+      adjust:
+        shift: [center_x+reset_x, center_y+reset_y]
+        rotate: reset_rot
+  _switch_outline:
+    - what: polygon
+      points: 
+        - shift: [-4, 1.5]
+        - shift: [2, 0]
+        - shift: [0, 2.5]
+        - shift: [4, 0]
+        - shift: [0, -2.5]
+        - shift: [2, 0]
+        - shift: [0, -3]
+        - shift: [-1, 0]
+        - shift: [0, -1]
+        - shift: [-6, 0]
+        - shift: [0, 1]
+        - shift: [-1, 0]
+      adjust:
+        shift: [center_x+power_x, center_y+power_y]
+        rotate: power_rot
+  _jst_outline:
+    - what: polygon
+      points:
+        - shift: [-3.95, 1.35]
+        - shift: [0.7, 0]
+        - shift: [0, -1.6]
+        - shift: [6.5, 0]
+        - shift: [0, 1.6]
+        - shift: [0.7, 0]
+        - shift: [0, -7.6]
+        - shift: [-7.9, 0]
+      adjust:
+        shift: [center_x+jst_x, center_y+jst_y]
+        rotate: jst_rot
+  _mx_hotswap_sockets:
+    - what: polygon
+      points:
+        - shift: [9, 0.5]
+        - shift: [0, 3.5]
+        - shift: [-2.5, 0]
+        - shift: [0, 2]
+        - shift: [-1, 1]
+        - shift: [-13.5, 0]
+        - shift: [0, -4]
+        - shift: [8, 0]
+        - shift: [2.5, -2.5]
+  _mx_hotswap_sockets_rev:
+    - what: polygon
+      points:
+        - shift: [-9, 0.5]
+        - shift: [0, 3.5]
+        - shift: [2.5, 0]
+        - shift: [0, 2]
+        - shift: [1, 1]
+        - shift: [13.5, 0]
+        - shift: [0, -4]
+        - shift: [-8, 0]
+        - shift: [-2.5, -2.5]
+  _choc_hotswap_sockets:
+    - what: polygon
+      points:
+        - shift: [-7.5, 1]
+        - shift: [0, 1]
+        - shift: [-1.5, 0]
+        - shift: [0, 3]
+        - shift: [1.5, 0]
+        - shift: [0, 1]
+        - shift: [3.5, 0]
+        - shift: [1.5, 1.5]
+        - shift: [0, 1]
+        - shift: [4.8, 0]
+        - shift: [0, -1]
+        - shift: [1.5, 0]
+        - shift: [0, -3]
+        - shift: [-1.5, 0]
+        - shift: [0, -1]
+        - shift: [-3.3, 0]
+        - shift: [-1.5, -1.5]
+        - shift: [0,-1]
+  _choc_hotswap_sockets_rev:
+    - what: polygon
+      points:
+        - shift: [7.5, 1]
+        - shift: [0, 1]
+        - shift: [1.5, 0]
+        - shift: [0, 3]
+        - shift: [-1.5, 0]
+        - shift: [0, 1]
+        - shift: [-3.5, 0]
+        - shift: [-1.5, 1.5]
+        - shift: [0, 1]
+        - shift: [-4.8, 0]
+        - shift: [0, -1]
+        - shift: [-1.5, 0]
+        - shift: [0, -3]
+        - shift: [1.5, 0]
+        - shift: [0, -1]
+        - shift: [3.3, 0]
+        - shift: [1.5, -1.5]
+        - shift: [0,-1]
+
+  _gat_hotswap_sockets:
+    - what: polygon
+      points:
+        - shift: [-9.5, 2.5]
+        - shift: [0, 4.5]
+        - shift: [6, 0]
+        - shift: [2, 1]
+        - shift: [9, 0]
+        - shift: [0, -4.5]
+        - shift: [-8.5, 0]
+        - shift: [-2, -1]
+  _gat_hotswap_sockets_rev:
+    - what: polygon
+      points:
+        - shift: [9.5, 2.5]
+        - shift: [0, 4.5]
+        - shift: [-6, 0]
+        - shift: [-2, 1]
+        - shift: [-9, 0]
+        - shift: [0, -4.5]
+        - shift: [8.5, 0]
+        - shift: [2, -1]
+
+  _hotswap_sockets:
+    - name: _choc_hotswap_sockets
+      where: true
+  _hotswap_sockets_rev:
+    - name: _choc_hotswap_sockets_rev
+      where: true
+
+  _mounting:
+    - what: circle
+      where.shift: [mounting_0_x, mounting_0_y]
+      radius: 2.7
+    - what: circle
+      where.shift: [mounting_1_x, mounting_1_y]
+      radius: 2.7
+    - what: circle
+      where.shift: [mounting_2_x, mounting_2_y]
+      radius: 2.7
+    - what: circle
+      where.shift: [mounting_3_x, mounting_3_y]
+      radius: 2.7
+    - what: circle
+      where.shift: [mounting_4_x, mounting_4_y]
+      radius: 2.7
+  
+  _key_circle_main:
+    - what: circle
+      where: true
+      radius: 2.5
+  __key_circle_left:
+    - what: circle
+      where.shift: [4.5, 0]
+      radius: 1.2
+  __key_circle_right:
+    - what: circle
+      where.shift: [-4.5, 0]
+      radius: 1.2
+  _key_circles_left:
+    - name: __key_circle_left
+      where: true
+  _key_circles_right:
+    - name: __key_circle_right
+      where: true
+
+  _battery:
+    - what: rectangle
+      size: [30, 12]
+      adjust: 
+        shift: [center_x+batt_x, center_y+batt_y]
+        rotate: batt_rot
+
+  
+  display_all_combo:
+    - name: pcb_outline
+    #- ^_controller_outline
+    #- ^_reset_outline
+    #- ^_jst_outline
+    #- ^_switch_outline
+    - ^key_outline
+    #- ^_hotswap_sockets
+    #- ^_hotswap_sockets_rev
+    - ^case_outline
+    #- ^_battery
+    #- ^_expanded_key_outline
+    #- ^_mounting
+  display_all_rotated:
+    - name: display_all_combo
+      adjust.rotate: -1*tot_rot
+      operation: stack
+  display_hotswap:
+    - name: _hotswap_sockets
+  display_hotswap_rev:
+    - name: _hotswap_sockets_rev
+  display_key_holes:
+    - ^_key_circle_main
+    - ^_key_circles_left
+    - ^_key_circles_right
+  _display_all_hotswap:
+    - name: _mx_hotswap_sockets
+    #- ^_gat_hotswap_sockets
+    #- ^_choc_hotswap_sockets
+    #- ^_mx_hotswap_sockets_rev
+    #- ^_gat_hotswap_sockets_rev
+    #- ^_choc_hotswap_sockets_rev
+  display_all_hotswap:
+    - name: _display_all_hotswap
+      where: true
+  
+pcbs:
+  board:
+    outlines:
+      edge:
+        outline: pcb_outline
+        layer: Edge.Cuts
+      hotswap_sockets:
+        outline: _hotswap_sockets
+        layer: F.SilkS
+      hotswap_sockets_rev:
+        outline: _hotswap_sockets_rev
+        layer: B.SilkS
+    footprints:
+      keys:
+        what: key-switches
+        where: true
+        params:
+          from: "{{name}}"
+          to: GND
+          mx_spacing:         mx_spacing
+          millmax_diameter:   millmax_diameter
+          mx:                 mx
+          mx_hotswap:         mx_hotswap
+          mx_reverse:         mx_reverse
+          mx_pth:             mx_pth
+          mx_rev_pad:         mx_rev_pad
+          mx_neg_y:           mx_neg_y
+          gateron_lp:         gateron_lp
+          gateron_lp_hotswap: gateron_lp_hotswap
+          gateron_lp_reverse: gateron_lp_reverse
+          gateron_lp_pth:     gateron_lp_pth
+          gateron_lp_rev_pad: gateron_lp_rev_pad
+          gateron_lp_neg_y:   gateron_lp_neg_y
+          choc:               choc
+          choc_hotswap:       choc_hotswap
+          choc_millmax:       choc_millmax
+          choc_reverse:       choc_reverse
+          choc_pth:           choc_pth
+          choc_neg_y:         choc_neg_y
+          keycaps:            keycaps
+      mcu:
+        what: promicro-pretty
+        where:
+          shift: [center_x+mcu_x, center_y+mcu_y]
+          rotate: mcu_rot
+        params:
+          P7: matrix_pinky_top
+          P18: matrix_ring_top
+          P19: matrix_middle_top
+          P20: matrix_index_top
+          P21: matrix_inner_top
+          P15: matrix_pinky_home
+          P14: matrix_ring_home
+          P16: matrix_middle_home
+          P10: matrix_index_home
+          P1: matrix_inner_home
+          P2: matrix_pinky_bottom
+          P3: matrix_ring_bottom
+          P4: matrix_middle_bottom
+          P5: matrix_index_bottom
+          P6: matrix_inner_bottom
+          P8: thumb_tucky
+          P9: thumb_reachy
+          P0: thumb_inner
+          RAW: RAW
+      reset:
+        what: reset_button
+        where:
+          shift: [center_x + reset_x, center_y + reset_y]
+          rotate: reset_rot
+        params:
+          from: GND
+          to: RST
+      reset2:
+        what: b3u1000p
+        where:
+          shift: [center_x + reset_x, center_y + reset_y]
+          rotate: 180+reset_rot
+        params:
+          r2: GND
+          r1: RST
+      slider_power:
+        what: slider_threeway
+        where:
+          shift: [center_x + power_x, center_y + power_y]
+          rotate: power_rot
+        params:
+          from: Bplus
+          left: ''
+          right: RAW
+          reversible: true
+          # if the switch is verticle, reverse the left and right nets on back side
+          # or to just make the wiring easier
+          reverse_left_right: true 
+      jst:
+        what: jstph_reversible
+        where:
+          shift: [center_x+jst_x, center_y+jst_y]
+          rotate: jst_rot
+        params:
+          pos: Bplus
+          neg: GND
+      mounting_hole_0:
+        what: mountinghole
+        where.shift: [mounting_0_x, mounting_0_y]
+        params:
+          drill_size: 3.2
+          outer_size: 5.4
+      mounting_hole_1:
+        what: mountinghole
+        where.shift: [mounting_1_x, mounting_1_y]
+        params:
+          drill_size: 3.2
+          outer_size: 5.4
+      mounting_hole_2:
+        what: mountinghole
+        where.shift: [mounting_2_x, mounting_2_y]
+        params:
+          drill_size: 3.2
+          outer_size: 5.4
+      mounting_hole_3:
+        what: mountinghole
+        where.shift: [mounting_3_x, mounting_3_y]
+        params:
+          drill_size: 3.2
+          outer_size: 5.4
+      mounting_hole_4:
+        what: mountinghole
+        where.shift: [mounting_4_x, mounting_4_y]
+        params:
+          drill_size: 3.2
+          outer_size: 5.4

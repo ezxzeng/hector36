@@ -4,8 +4,8 @@ output
 other_pcbs
 routed_pcb/*/*-backups
 routed_pcb/*/fp-info-cache
-routed_pcb/*/gerbers/
-routed_pcb/*/*.kicad
-routed_pcb/*/*.kicad_pro
+routed_pcb/*/gerbers/*
+routed_pcb/*/board.kicad_prl
+routed_pcb/*/board.kicad_pro
 */~*
 ~*
