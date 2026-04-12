@@ -50,6 +50,8 @@ For PCB fabrication through JLCPCB or PCBWay, use the gerbers.zip file inside th
 
 note that estimated price is from a brief look at aliexpress, and might be higher than what you'll actually have to pay if you buy in higher quantities (especially for batteries)
 
+optional: [socketing the controller](https://docs.splitkb.com/frequently-asked-questions/about-split-keyboards/microcontrollers/sockets), see [this guide](https://www.40percent.club/p/socketing-pro-micro.html) or [this guide](https://docs.splitkb.com/product-guides/aurora-series/build-guide/microcontrollers)
+
 ## Inspiration
 
 - [bgkeeb](https://github.com/sadekbaroudi/bgkeeb)
