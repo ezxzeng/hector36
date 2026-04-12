@@ -8,11 +8,10 @@ left | right | outline
 1. Take 2 pcbs and flip them to the **back** side
 ![flip to back](images/20260411_170405.jpg)
 
-2. Solder the jumper pads for the controller so that the two sides of the pads can be connected together.
-![jumper pads](images/20260411_170419.jpg)
+1. Solder the jumper pads for the controller so that the two sides of the pads can be connected together.
 ![solder jumper pads](images/20260411_170654.jpg)
 
-3. Still on the back side, put solder on the pads for the hotswap sockets
+1. Still on the back side, put solder on the pads for the hotswap sockets
 ![hotswap sockets](images/20260411_171538.jpg)
 
 1. Melt the solder and press the hotswap sockets down, one side at a time. Use tweezers if that helps.
