@@ -5,7 +5,7 @@
 
 left | right | outline
 -|-|-
-![left](routed_pcb/mx/board-front.png) | ![right](routed_pcb/mx/board-back.png) | ![outline](routed_pcb/mx/display_all_rotated.svg)
+![left](routed_pcb/mx/images/board-front.png) | ![right](routed_pcb/mx/images/board-back.png) | ![outline](routed_pcb/mx/images/display_all_rotated.svg)
 
 Hector36 is a 36-key split keyboard with a 5×3 layout and 3 thumb keys per half.  
 It is designed to stay under **100 mm × 100 mm per PCB**, which makes fabrication much cheaper while still keeping a comfortable, aggressively staggered and splayed layout.
@@ -80,9 +80,11 @@ onshape [link](https://cad.onshape.com/documents/dab7ead69061981322a5fa82/w/eeec
 
 ### Get board image renderings:
 ```bash
-docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/mx/board.kicad_pcb images/board-front.png
+export pcb_type="mx"
 
-docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back routed_pcb/mx/board.kicad_pcb images/board-back.png
+docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json routed_pcb/$pcb_type/board.kicad_pcb routed_pcb/$pcb_type/images/board-front.png
+
+docker run -v $(pwd):/kikit --entrypoint pcbdraw yaqwsx/kikit:v1.3.0-v7  plot --style style.json --side back routed_pcb/$pcb_type/board.kicad_pcb routed_pcb/$pcb_type/images/board-back.png
 ```
 
 ## Showcase
