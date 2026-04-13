@@ -52,6 +52,9 @@ note that estimated price is from a brief look at aliexpress, and might be highe
 
 optional: [socketing the controller](https://docs.splitkb.com/frequently-asked-questions/about-split-keyboards/microcontrollers/sockets), see [this guide](https://www.40percent.club/p/socketing-pro-micro.html) or [this guide](https://docs.splitkb.com/product-guides/aurora-series/build-guide/microcontrollers)
 
+## Firmware
+see [zmk module](https://github.com/ezxzeng/zmk-keyboards-hector36)
+
 ## Inspiration
 
 - [bgkeeb](https://github.com/sadekbaroudi/bgkeeb)

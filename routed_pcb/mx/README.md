@@ -58,3 +58,7 @@ If this value is between 7.2mm and 8.2mm, then go ahead and use the STL files av
 1. put everything together and we're done!
 ![](images/20260411_213432.jpg)
 ![](images/20260411_183440.jpg)
+
+
+## Firmware
+see [zmk module](https://github.com/ezxzeng/zmk-keyboards-hector36)
