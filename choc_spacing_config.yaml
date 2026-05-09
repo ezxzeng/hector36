@@ -21,49 +21,52 @@ units:
   choc_pth:           0
   choc_neg_y:         1
   keycaps:            1
-  center_x: 130
-  center_y: -103
-  kx: 18
-  ky: 18
+  center_x: 137.5
+  center_y: -95
+  #center_x: 130.5
+  #center_y: -103
+  kx: cx
+  ky: cy
   px: kx + 1.2
   py: ky + 1.2
   thumb_size: 1
-  pinky_splay: -5.5
-  ring_splay: -4.5
-  main_rot: -4
+  pinky_splay: -6
+  ring_splay: -4
+  main_rot: 0
+  #main_rot: 4
   tot_rot: pinky_splay+ring_splay+main_rot
 
-  mcu_x: -23
-  mcu_y: -23.5
+  mcu_x: -20.5
+  mcu_y: -22.2
   mcu_rot: 90+tot_rot
-  reset_x: -38
-  reset_y: -25
+  reset_x: -6
+  reset_y: -18
   reset_rot: tot_rot+90
-  power_x: -44
-  power_y: -35
+  power_x: -39
+  power_y: -35.6
   power_rot: tot_rot+180
-  jst_x: -5.8
-  jst_y: -1
+  jst_x: -5
+  jst_y: 2.5
   jst_rot: tot_rot
   bottom_left_pcb_cut: 15
   mid_left_pcb_y: 35
-  batt_x: 5
-  batt_y: -41
+  batt_x: 7
+  batt_y: -39
   batt_rot: tot_rot
 
-  case_left_offset: 3.5
-  case_top_offset: 11
-  case_right_offset: 8
-  case_left_to_mid_finger_top: 49
+  case_left_offset: 1
+  case_top_offset: 9
+  case_right_offset: 7.5
+  case_left_to_mid_finger_top: 47.5
   case_tol: 0.2
   bottom_left_case_cut: bottom_left_pcb_cut + abs(case_left_offset*tan((tot_rot)*pi/180))-case_tol
   left_case_x_travel: abs((100-bottom_left_case_cut)*tan((main_rot)*pi/180))
   top_left_case_offset: case_left_offset - left_case_x_travel
   mid_finger_top_to_case_right_x: case_right_offset+ top_left_case_offset +100-case_left_to_mid_finger_top
   mid_finger_top_to_case_right_y: -1*abs(mid_finger_top_to_case_right_x * tan((tot_rot)*pi/180))
-  case_bottom_offset: 5
+  case_bottom_offset: 0
   case_thumb_x: -14
-  case_thumb_y: -14.5
+  case_thumb_y: -16
 
   mounting_0_x: center_x-43.5
   mounting_0_y: center_y+46.5
@@ -71,8 +74,8 @@ units:
   mounting_1_y: center_y+46.5
   mounting_2_x: center_x+46.5
   mounting_2_y: center_y-20
-  mounting_3_x: center_x+29.5
-  mounting_3_y: center_y-46.5
+  mounting_3_x: center_x+34
+  mounting_3_y: center_y-46
   mounting_4_x: center_x-46.5
   mounting_4_y: center_y-23
 
@@ -89,34 +92,34 @@ points:
         pinky:
           rows:
             bottom:
-              shift: [-3.79, 0]
+              shift: [-2.75, 0]
         ring:
           key:
             splay: pinky_splay
-            stagger: 12.3
+            stagger: 12
           rows:
-            bottom.shift: [-1.89, 0]
-            top.rotate: 180
+            bottom.shift: [-1.3, 0]
+            top.rotate: 0
         middle:
           key:
             splay: ring_splay
-            stagger: 9.47
+            stagger: 9
           rows.top.rotate: 180
         index.key:
           splay: 0
-          stagger: -9.47
+          stagger: -8.5
         inner:
           key:
-            stagger: -1.89
-          rows.top.rotate: 180
+            stagger: -2.5
+          rows.top.rotate: 0
       rows:
-        bottom.padding: kx
-        home.padding: kx
-        top.padding: kx
+        bottom.padding: ky
+        home.padding: ky
+        top.padding: ky
     thumb:
       anchor:
         ref: matrix_middle_bottom
-        shift: [12.3, -31]
+        shift: [12.8, -29.5]
       columns:
         inner:
           key.name: thumb_inner
@@ -124,13 +127,13 @@ points:
           key:
             name: thumb_tucky
             stagger: -2
-            splay: -14
-            shift: [3, 0]
+            splay: -15
+            shift: [1.25, -0.3]
         reachy:
           key.spread: kx
           key.splay: -16
-          key.shift: [7, -1]
-          key.rotate: 90
+          key.shift: [4, -2.1]
+          key.rotate: 180
           key.width: thumb_size * kx
           key.name: thumb_reachy
 outlines:
@@ -155,10 +158,10 @@ outlines:
   _batt_cuttout:
     - what: polygon
       points:
-        - shift: [center_x-17, center_y-50]
+        - shift: [center_x-13, center_y-50]
         - shift: [24*abs(tan(tot_rot*pi/180)),24]
-        - shift: [23.4, -5.6]
-        - shift: [15, -8]
+        - shift: [25, -4.42]
+        - shift: [15, -7]
         - shift: [-20*abs(tan(tot_rot*pi/180)), -20]
   _pcb_outline:
     - what: polygon
@@ -169,13 +172,13 @@ outlines:
         - shift: [(100-mid_left_pcb_y-bottom_left_pcb_cut)*abs(tan(main_rot*pi/180)), 100-mid_left_pcb_y-bottom_left_pcb_cut]
         - shift: [100-(100-mid_left_pcb_y-bottom_left_pcb_cut)*abs(tan(main_rot*pi/180))-10, 0]
         - shift: [10, -3]
-        - shift: [0, -92.25]
-        - shift: [-4.75, -4.75]
+        - shift: [0, -88]
+        - shift: [-8, -9]
         #- shift: [-7, 0]
         #- shift: [-9, 9]
         #- shift: [-18, 9.5]
         #- shift: [-20, 4.8]
-        - shift: [-96.75 + abs(bottom_left_pcb_cut/tan((tot_rot)*pi/180)), 0]
+        - shift: [-92 + abs(bottom_left_pcb_cut/tan((tot_rot)*pi/180)), 0]
       fillet: 2
     - -_batt_cuttout
   pcb_outline:
@@ -387,17 +390,17 @@ outlines:
   
   display_all_combo:
     - name: pcb_outline
-    #- ^_controller_outline
-    #- ^_reset_outline
-    #- ^_jst_outline
-    #- ^_switch_outline
+    - ^_controller_outline
+    - ^_reset_outline
+    - ^_jst_outline
+    - ^_switch_outline
     - ^key_outline
-    #- ^_hotswap_sockets
-    #- ^_hotswap_sockets_rev
+    - ^_hotswap_sockets
+    - ^_hotswap_sockets_rev
     - ^case_outline
-    #- ^_battery
-    #- ^_expanded_key_outline
-    #- ^_mounting
+    - ^_battery
+    - ^_expanded_key_outline
+    - ^_mounting
   display_all_rotated:
     - name: display_all_combo
       adjust.rotate: -1*tot_rot
@@ -411,12 +414,8 @@ outlines:
     - ^_key_circles_left
     - ^_key_circles_right
   _display_all_hotswap:
-    - name: _mx_hotswap_sockets
-    #- ^_gat_hotswap_sockets
-    #- ^_choc_hotswap_sockets
-    #- ^_mx_hotswap_sockets_rev
-    #- ^_gat_hotswap_sockets_rev
-    #- ^_choc_hotswap_sockets_rev
+    - name: _choc_hotswap_sockets
+    - _choc_hotswap_sockets_rev
   display_all_hotswap:
     - name: _display_all_hotswap
       where: true
