@@ -36,16 +36,19 @@ units:
   mcu_x: -24
   mcu_y: -26.3
   mcu_rot: 90+tot_rot
-  reset_x: -10
-  reset_y: -39
-  reset_rot: tot_rot + 180
-  power_x: -12
-  power_y: -46
+  reset_x: -9
+  reset_y: -22
+  reset_rot: tot_rot + 90
+  power_x: -44
+  power_y: -38
   power_rot: tot_rot+180
-  jst_x: -3
-  jst_y: -3
-  jst_rot: -60
+  jst_x: -6.5
+  jst_y: -1.5
+  jst_rot: tot_rot
   bottom_left_pcb_cut: 12
+  batt_x: 2
+  batt_y: -44
+  batt_rot: tot_rot
 
   case_left_offset: 7.5
   case_top_offset: 11.5
@@ -67,10 +70,10 @@ units:
   mounting_1_y: center_y+45
   mounting_2_x: center_x+46.5
   mounting_2_y: center_y-25
-  mounting_3_x: center_x+18
-  mounting_3_y: center_y-45
-  mounting_4_x: center_x-46.5
-  mounting_4_y: center_y-28
+  mounting_3_x: center_x+24
+  mounting_3_y: center_y-46.5
+  mounting_4_x: center_x-45
+  mounting_4_y: center_y-22
 
 points:
   zones:
@@ -154,7 +157,16 @@ outlines:
     - what: rectangle
       size: [100, 100]
       adjust.shift: [center_x, center_y]
-  pcb_outline:
+  
+  _batt_cuttout:
+    - what: polygon
+      points:
+        - shift: [center_x-17, center_y-50]
+        - shift: [18.75*abs(tan(tot_rot*pi/180)),18.75]
+        - shift: [30, -30*abs(tan(tot_rot*pi/180))]
+        - shift: [4, -2.1]
+        - shift: [-20*abs(tan(tot_rot*pi/180)), -20]
+  _pcb_outline:
     - what: polygon
       points:
         - shift: [center_x-50, center_y-50+bottom_left_pcb_cut]
@@ -163,6 +175,10 @@ outlines:
         - shift: [0, -95.25]
         - shift: [-4, -4.75]
         - shift: [-96 + abs(bottom_left_pcb_cut/tan((tot_rot)*pi/180)), 0]
+      fillet: 2
+    - -_batt_cuttout
+  pcb_outline:
+    - name: _pcb_outline
       fillet: 2
   case_outline:
     - what: polygon
@@ -342,18 +358,27 @@ outlines:
     - what: circle
       where.shift: [mounting_4_x, mounting_4_y]
       radius: 2.7
+
+  _battery:
+    - what: rectangle
+      size: [30, 14]
+      adjust: 
+        shift: [center_x+batt_x, center_y+batt_y]
+        rotate: batt_rot
   
   display_all_combo:
     - name: pcb_outline
-    #- ^_controller_outline
-    #- ^_reset_outline
-    #- ^_jst_outline
-    #- ^_switch_outline
+    - ^_controller_outline
+    - ^_reset_outline
+    - ^_jst_outline
+    - ^_switch_outline
     - ^key_outline
-    #- ^_hotswap_sockets
-    #- ^_hotswap_sockets_rev
+    - ^_hotswap_sockets
+    - ^_hotswap_sockets_rev
     - ^case_outline
-    #- ^_mounting
+    - ^_mounting
+    - ^_battery
+    - ^_expanded_key_outline
   display_all_rotated:
     - name: display_all_combo
       adjust.rotate: -1*tot_rot
