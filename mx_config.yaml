@@ -1,33 +1,10 @@
 units:
-  mx:                 1
-  choc:               0
-  gateron_lp:         0
-
-  mx_spacing:         1
-  millmax_diameter:   1.6
-  mx_hotswap:         1
-  mx_reverse:         1
-  mx_pth:             0
-  mx_rev_pad:         1
-  mx_neg_y:           1
-  gateron_lp_hotswap: 1
-  gateron_lp_reverse: 1
-  gateron_lp_pth:     0
-  gateron_lp_rev_pad: 1
-  gateron_lp_neg_y:   1
-  choc_hotswap:       1
-  choc_millmax:       0
-  choc_reverse:       1
-  choc_pth:           0
-  choc_neg_y:         1
-  keycaps:            1
   center_x: 133.5
   center_y: -99.8
   kx: 19
   ky: 19
   px: kx + 1.2
   py: ky + 1.2
-  thumb_size: 1
   pinky_splay: -5.5
   ring_splay: -4.5
   main_rot: -4
@@ -80,9 +57,7 @@ points:
     matrix:
       # Fix placement on KiCAD sheet.
       anchor.shift: [100, -100]
-      key:
-        padding: 1ky
-        spread: 1kx
+      key.spread: 1kx
       rotate: main_rot
       columns:
         pinky:
@@ -105,15 +80,12 @@ points:
             stagger: 10
           rows.top.rotate: 180
         index.key:
-          splay: 0
           stagger: -10
         inner:
-          key:
-            stagger: -2
+          key.stagger: -2
           rows:
             home.rotate: 90
-            top:
-              shift: [kx, -kx]
+            top.shift: [kx, -kx]
       rows:
         bottom.padding: kx
         home.padding: kx
@@ -136,7 +108,6 @@ points:
           key.splay: -16
           key.shift: [7, -1]
           key.rotate: 90
-          key.width: thumb_size * kx
           key.name: thumb_reachy
 outlines:
   # ==================== keys ====================
@@ -145,19 +116,12 @@ outlines:
       where: true
       size: [kx, ky]
       operation: stack
-  _small_keys:
-    - what: rectangle
-      where: true
-      size: [kx-1, ky-1]
   _expanded_key_outline:
     - what: rectangle
       where: true
       size: [px, py]
-  _limits:
-    - what: rectangle
-      size: [100, 100]
-      adjust.shift: [center_x, center_y]
-  
+
+  # ==================== pcb ====================
   _batt_cuttout:
     - what: polygon
       points:
@@ -180,6 +144,8 @@ outlines:
   pcb_outline:
     - name: _pcb_outline
       fillet: 2
+
+  # ==================== case ====================
   case_outline:
     - what: polygon
       points:
@@ -191,6 +157,8 @@ outlines:
         - shift: [case_thumb_x, case_thumb_y]
         - shift: [(-100-case_thumb_x-case_left_offset-case_right_offset) +abs((bottom_left_case_cut+case_bottom_offset)/tan((tot_rot)*pi/180)), 0]
       fillet: 3
+
+  # ==================== components ====================
   _controller_outline:
     - what: polygon
       points:
@@ -243,6 +211,14 @@ outlines:
       adjust:
         shift: [center_x+jst_x, center_y+jst_y]
         rotate: jst_rot
+  _battery:
+    - what: rectangle
+      size: [30, 14]
+      adjust: 
+        shift: [center_x+batt_x, center_y+batt_y]
+        rotate: batt_rot
+
+  # ==================== sockets ====================
   _mx_hotswap_sockets:
     - what: polygon
       points:
@@ -267,72 +243,6 @@ outlines:
         - shift: [0, 4]
         - shift: [8, 0]
         - shift: [2.5, 2.5]
-  _choc_hotswap_sockets:
-    - what: polygon
-      points:
-        - shift: [-7.5, 1]
-        - shift: [0, 1]
-        - shift: [-1.5, 0]
-        - shift: [0, 3]
-        - shift: [1.5, 0]
-        - shift: [0, 1]
-        - shift: [3.5, 0]
-        - shift: [1.5, 1.5]
-        - shift: [0, 1]
-        - shift: [4.8, 0]
-        - shift: [0, -1]
-        - shift: [1.5, 0]
-        - shift: [0, -3]
-        - shift: [-1.5, 0]
-        - shift: [0, -1]
-        - shift: [-3.3, 0]
-        - shift: [-1.5, -1.5]
-        - shift: [0,-1]
-  _choc_hotswap_sockets_rev:
-    - what: polygon
-      points:
-        - shift: [7.5, 1]
-        - shift: [0, 1]
-        - shift: [1.5, 0]
-        - shift: [0, 3]
-        - shift: [-1.5, 0]
-        - shift: [0, 1]
-        - shift: [-3.5, 0]
-        - shift: [-1.5, 1.5]
-        - shift: [0, 1]
-        - shift: [-4.8, 0]
-        - shift: [0, -1]
-        - shift: [-1.5, 0]
-        - shift: [0, -3]
-        - shift: [1.5, 0]
-        - shift: [0, -1]
-        - shift: [3.3, 0]
-        - shift: [1.5, -1.5]
-        - shift: [0,-1]
-
-  _gat_hotswap_sockets:
-    - what: polygon
-      points:
-        - shift: [-9.5, 2.5]
-        - shift: [0, 4.5]
-        - shift: [6, 0]
-        - shift: [2, 1]
-        - shift: [9, 0]
-        - shift: [0, -4.5]
-        - shift: [-8.5, 0]
-        - shift: [-2, -1]
-  _gat_hotswap_sockets_rev:
-    - what: polygon
-      points:
-        - shift: [9.5, 2.5]
-        - shift: [0, 4.5]
-        - shift: [-6, 0]
-        - shift: [-2, 1]
-        - shift: [-9, 0]
-        - shift: [0, -4.5]
-        - shift: [8.5, 0]
-        - shift: [2, -1]
-
   _hotswap_sockets:
     - name: _mx_hotswap_sockets
       adjust.rotate: 180
@@ -342,6 +252,7 @@ outlines:
       adjust.rotate: 180
       where: true
 
+  # ==================== mounting ====================
   _mounting:
     - what: circle
       where.shift: [mounting_0_x, mounting_0_y]
@@ -359,13 +270,7 @@ outlines:
       where.shift: [mounting_4_x, mounting_4_y]
       radius: 2.7
 
-  _battery:
-    - what: rectangle
-      size: [30, 14]
-      adjust: 
-        shift: [center_x+batt_x, center_y+batt_y]
-        rotate: batt_rot
-  
+  # ==================== display ====================
   display_all_combo:
     - name: pcb_outline
     - ^_controller_outline
@@ -403,27 +308,27 @@ pcbs:
         params:
           from: "{{name}}"
           to: GND
-          mx_spacing:         mx_spacing
-          millmax_diameter:   millmax_diameter
-          mx:                 mx
-          mx_hotswap:         mx_hotswap
-          mx_reverse:         mx_reverse
-          mx_pth:             mx_pth
-          mx_rev_pad:         mx_rev_pad
-          mx_neg_y:           mx_neg_y
-          gateron_lp:         gateron_lp
-          gateron_lp_hotswap: gateron_lp_hotswap
-          gateron_lp_reverse: gateron_lp_reverse
-          gateron_lp_pth:     gateron_lp_pth
-          gateron_lp_rev_pad: gateron_lp_rev_pad
-          gateron_lp_neg_y:   gateron_lp_neg_y
-          choc:               choc
-          choc_hotswap:       choc_hotswap
-          choc_millmax:       choc_millmax
-          choc_reverse:       choc_reverse
-          choc_pth:           choc_pth
-          choc_neg_y:         choc_neg_y
-          keycaps:            keycaps
+          mx_spacing:         1 
+          millmax_diameter:   1.6
+          mx:                 1
+          mx_hotswap:         1
+          mx_reverse:         1
+          mx_pth:             0
+          mx_rev_pad:         1
+          mx_neg_y:           1
+          gateron_lp:         0
+          gateron_lp_hotswap: 1
+          gateron_lp_reverse: 1
+          gateron_lp_pth:     0
+          gateron_lp_rev_pad: 1
+          gateron_lp_neg_y:   0
+          choc:               0
+          choc_hotswap:       1
+          choc_millmax:       0
+          choc_reverse:       1
+          choc_pth:           0
+          choc_neg_y:         1
+          keycaps:            1
       mcu:
         what: promicro-pretty
         where:
