@@ -64,28 +64,23 @@ points:
           rows:
             bottom:
               shift: [-4, 0]
-              rotate: -90
-            home.shift: [-kx, -kx]
-            top.shift: [-kx, -kx]
+              rotate: 90
+            home.shift: [kx, -kx]
+            top.shift: [kx, -kx]
         ring:
           key:
             splay: pinky_splay
             stagger: 13
-          rows:
-            bottom.shift: [-2, 0]
-            top.rotate: 180
+          rows.bottom.shift: [-2, 0]
         middle:
           key:
             splay: ring_splay
             stagger: 10
-          rows.top.rotate: 180
         index.key:
           stagger: -10
         inner:
           key.stagger: -2
-          rows:
-            home.rotate: 90
-            top.shift: [kx, -kx]
+          rows.top.rotate: -90
       rows:
         bottom.padding: kx
         home.padding: kx
@@ -107,7 +102,7 @@ points:
           key.spread: kx
           key.splay: -16
           key.shift: [7, -1]
-          key.rotate: 90
+          key.rotate: -90
           key.name: thumb_reachy
 outlines:
   # ==================== keys ====================
@@ -218,37 +213,54 @@ outlines:
         shift: [center_x+batt_x, center_y+batt_y]
         rotate: batt_rot
 
-  # ==================== sockets ====================
-  _mx_hotswap_sockets:
+  _choc_hotswap_sockets:
     - what: polygon
       points:
-        - shift: [-9, -0.5]
-        - shift: [0, -3.5]
-        - shift: [2.5, 0]
-        - shift: [0, -2]
-        - shift: [1, -1]
-        - shift: [13.5, 0]
-        - shift: [0, 4]
-        - shift: [-8, 0]
-        - shift: [-2.5, 2.5]
-  _mx_hotswap_sockets_rev:
+        - shift: [-7.5, 1]
+        - shift: [0, 1]
+        - shift: [-1.5, 0]
+        - shift: [0, 3]
+        - shift: [1.5, 0]
+        - shift: [0, 1]
+        - shift: [3.5, 0]
+        - shift: [1.5, 1.5]
+        - shift: [0, 1]
+        - shift: [4.8, 0]
+        - shift: [0, -1]
+        - shift: [1.5, 0]
+        - shift: [0, -3]
+        - shift: [-1.5, 0]
+        - shift: [0, -1]
+        - shift: [-3.3, 0]
+        - shift: [-1.5, -1.5]
+        - shift: [0,-1]
+  _choc_hotswap_sockets_rev:
     - what: polygon
       points:
-        - shift: [9, -0.5]
-        - shift: [0, -3.5]
-        - shift: [-2.5, 0]
-        - shift: [0, -2]
-        - shift: [-1, -1]
-        - shift: [-13.5, 0]
-        - shift: [0, 4]
-        - shift: [8, 0]
-        - shift: [2.5, 2.5]
+        - shift: [7.5, 1]
+        - shift: [0, 1]
+        - shift: [1.5, 0]
+        - shift: [0, 3]
+        - shift: [-1.5, 0]
+        - shift: [0, 1]
+        - shift: [-3.5, 0]
+        - shift: [-1.5, 1.5]
+        - shift: [0, 1]
+        - shift: [-4.8, 0]
+        - shift: [0, -1]
+        - shift: [-1.5, 0]
+        - shift: [0, -3]
+        - shift: [1.5, 0]
+        - shift: [0, -1]
+        - shift: [3.3, 0]
+        - shift: [1.5, -1.5]
+        - shift: [0,-1]
   _hotswap_sockets:
-    - name: _mx_hotswap_sockets
+    - name: _choc_hotswap_sockets
       adjust.rotate: 180
       where: true
   _hotswap_sockets_rev:
-    - name: _mx_hotswap_sockets_rev
+    - name: _choc_hotswap_sockets_rev
       adjust.rotate: 180
       where: true
 
@@ -310,7 +322,7 @@ pcbs:
           to: GND
           mx_spacing:         1 
           millmax_diameter:   1.6
-          mx:                 1
+          mx:                 0
           mx_hotswap:         1
           mx_reverse:         1
           mx_pth:             0
@@ -322,7 +334,7 @@ pcbs:
           gateron_lp_pth:     0
           gateron_lp_rev_pad: 1
           gateron_lp_neg_y:   0
-          choc:               0
+          choc:               1
           choc_hotswap:       1
           choc_millmax:       0
           choc_reverse:       1
