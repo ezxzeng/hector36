@@ -64,28 +64,22 @@ points:
           rows:
             bottom:
               shift: [-4, 0]
-              rotate: -90
-            home.shift: [-kx, -kx]
-            top.shift: [-kx, -kx]
+              rotate: 90
+            home.shift: [kx, -kx]
+            top.shift: [kx, -kx]
         ring:
           key:
             splay: pinky_splay
             stagger: 13
-          rows:
-            bottom.shift: [-2, 0]
-            top.rotate: 180
+          rows.bottom.shift: [-2, 0]
         middle:
           key:
             splay: ring_splay
             stagger: 10
-          rows.top.rotate: 180
-        index.key:
-          stagger: -10
+        index.key.stagger: -10
         inner:
           key.stagger: -2
-          rows:
-            home.rotate: 90
-            top.shift: [kx, -kx]
+          rows.top.rotate: -90
       rows:
         bottom.padding: kx
         home.padding: kx
@@ -95,8 +89,7 @@ points:
         ref: matrix_middle_bottom
         shift: [13, -32]
       columns:
-        inner:
-          key.name: thumb_inner
+        inner.key.name: thumb_inner
         tucky:
           key:
             name: thumb_tucky
@@ -107,7 +100,7 @@ points:
           key.spread: kx
           key.splay: -16
           key.shift: [7, -1]
-          key.rotate: 90
+          key.rotate: -90
           key.name: thumb_reachy
 outlines:
   # ==================== keys ====================
@@ -245,11 +238,9 @@ outlines:
         - shift: [2.5, 2.5]
   _hotswap_sockets:
     - name: _mx_hotswap_sockets
-      adjust.rotate: 180
       where: true
   _hotswap_sockets_rev:
     - name: _mx_hotswap_sockets_rev
-      adjust.rotate: 180
       where: true
 
   # ==================== mounting ====================
@@ -315,7 +306,7 @@ pcbs:
           mx_reverse:         1
           mx_pth:             0
           mx_rev_pad:         1
-          mx_neg_y:           1
+          mx_neg_y:           0
           gateron_lp:         0
           gateron_lp_hotswap: 1
           gateron_lp_reverse: 1
